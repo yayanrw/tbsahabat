@@ -1,0 +1,35 @@
+/* Your Custom CSS Goes here */
+
+.error {
+	color: #ff4857;
+}
+
+.hidden {
+	display: none;
+}
+
+.text-black {
+	color: #000;
+}
+
+#toast-container.toast-bottom-center > div,
+#toast-container.toast-top-center > div {
+	width: 50% !important;
+	margin-left: auto;
+	margin-right: auto;
+	min-height: 100px !important;
+}
+
+#toast-container {
+	padding-top: 30px !important;
+}
+
+.toast-message {
+	padding-top: 20px !important;
+	padding-left: 10px !important;
+	font-size: 16pt !important;
+}
+
+.k-multiselect-wrap .k-button {
+	padding-right: 30px;
+}
