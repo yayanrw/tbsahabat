@@ -36,18 +36,39 @@ $currentRole = $this->session->userdata('role_id');
 						</ul>
 					</li>
 				<?php } ?>
-
-				<li>
-					<a href="<?= base_url('master/marketplace') ?>" class="<?= $segment == 'master/marketplace' ? 'active' : ''; ?>"><i class="material-icons-two-tone">store</i> Market Place</a>
-				</li>
 			</ul>
 		<?php } ?>
 		<ul class="accordion-menu">
 			<li class="sidebar-title">
-				<?= APPS_NAME; ?>
+				PROMO
 			</li>
 			<li>
-				<a href="<?= base_url('events') ?>" class="<?= $segment == 'events' ? 'active' : ''; ?>"><i class="material-icons-two-tone">event</i> Events</a>
+				<a href="<?= base_url('banners') ?>" class="<?= $segment == 'banners' ? 'active' : ''; ?>"><i class="material-icons-two-tone">campaign</i> Banners</a>
+			</li>
+		</ul>
+		<ul class="accordion-menu">
+			<li class="sidebar-title">
+				PRODUCT
+			</li>
+			<li>
+				<a href="<?= base_url('brands') ?>" class="<?= $segment == 'brands' ? 'active' : ''; ?>"><i class="material-icons-two-tone">branding_watermark</i> Brands</a>
+			</li>
+			<li>
+				<a href="<?= base_url('product-categories') ?>" class="<?= $segment == 'product-categories' ? 'active' : ''; ?>"><i class="material-icons-two-tone">category</i> Product Categories</a>
+			</li>
+			<li>
+				<a href="<?= base_url('products') ?>" class="<?= $segment == 'products' ? 'active' : ''; ?>"><i class="material-icons-two-tone">inventory_2</i> Products</a>
+			</li>
+		</ul>
+		<ul class="accordion-menu">
+			<li class="sidebar-title">
+				SETTING
+			</li>
+			<li>
+				<a href="<?= base_url('about') ?>" class="<?= $segment == 'about' ? 'active' : ''; ?>"><i class="material-icons-two-tone">settings</i> About</a>
+			</li>
+			<li>
+				<a href="<?= base_url('social-medias') ?>" class="<?= $segment == 'social-medias' ? 'active' : ''; ?>"><i class="material-icons-two-tone">groups</i> Social Media</a>
 			</li>
 		</ul>
 	</div>
