@@ -69,14 +69,14 @@ $route['master/roles/insert'] = 'Master/Roles/Insert';
 $route['master/roles/update'] = 'Master/Roles/Update';
 $route['master/roles/delete/(:num)'] = 'Master/Roles/Delete/$1';
 
-$route['master/marketplace'] = 'Master/MarketPlace';
-$route['master/marketplace/update-active/(:num)/(:num)'] = 'Master/MarketPlace/UpdateActive/$1/$2';
-$route['master/marketplace/get-all'] = 'Master/MarketPlace/GetAll';
-$route['master/marketplace/datatable'] = 'Master/MarketPlace/Datatable';
-$route['master/marketplace/get/(:num)'] = 'Master/MarketPlace/Get/$1';
-$route['master/marketplace/insert'] = 'Master/MarketPlace/Insert';
-$route['master/marketplace/update'] = 'Master/MarketPlace/Update';
-$route['master/marketplace/delete/(:num)'] = 'Master/MarketPlace/Delete/$1';
+$route['brands'] = 'Brand';
+$route['brands/update-active/(:num)/(:num)'] = 'Brand/UpdateActive/$1/$2';
+$route['brands/get-all'] = 'Brand/GetAll';
+$route['brands/datatable'] = 'Brand/Datatable';
+$route['brands/get/(:num)'] = 'Brand/Get/$1';
+$route['brands/insert'] = 'Brand/Insert';
+$route['brands/update'] = 'Brand/Update';
+$route['brands/delete/(:num)'] = 'Brand/Delete/$1';
 
 $route['master/users'] = 'Master/Users';
 $route['master/users/get-all'] = 'Master/Users/GetAll';
