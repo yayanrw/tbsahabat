@@ -3,10 +3,50 @@
 		<div class="col">
 			<div class="page-description">
 				<h1><?= $titleName; ?></h1>
-				<!-- <span>Customized Bootstrap forms to match Neptune's styles.</span> -->
 			</div>
 		</div>
 	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<h5 class="card-title">Form • <?= $titleName; ?></h5>
+				</div>
+				<div class="card-body">
+					<form id="form" method="post" class="row g-3">
+						<div class="col-md-4">
+							<div class="mb-3">
+								<label for="brand" class="form-label">Brand</label>
+								<input type="hidden" id="id" name="id">
+								<input type="text" class="form-control" id="brand" name="brand" placeholder="Role">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="mb-3">
+								<label for="img_url" class="form-label">Image</label>
+								<input type="file" class="form-control" id="img_url" name="img_url" placeholder="Image">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="mb-3">
+								<label for="is_active" class="form-label">Status</label>
+								<select class="form-select" id="is_active" name="is_active">
+									<option value="1">Active</option>
+									<option value="0">Inactive</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<button id="btnCancel" type="button" class="btn btn-default">Cancel</button>
+							<button id="btnSubmit" type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="row">
 		<div class="col">
 			<div class="card">
