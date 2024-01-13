@@ -17,7 +17,7 @@ class Brand extends CI_Controller
 
 	public function index()
 	{
-		$helper = new Helper();
+		$helper = Helper::getInstance();
 		$helper->IsLoggedIn();
 		$content['titleName'] = $this->titleName;
 		$content['js'] = 'js/BrandJs';
@@ -29,7 +29,7 @@ class Brand extends CI_Controller
 
 	public function Datatable()
 	{
-		$helper = new Helper();
+		$helper = Helper::getInstance();
 		$table = $this->tableName;
 		$column_order = array('brand', 'is_active');
 		$column_search = array('brand', 'is_active');
@@ -80,7 +80,7 @@ class Brand extends CI_Controller
 			$data = $this->BrandModel->GetAll();
 			echo json_encode(['status' => true, 'message' => 'Success', 'data' => $data]);
 		} catch (\Throwable $th) {
-			$helper = new Helper();
+			$helper = Helper::getInstance();
 			$data = array(
 				'log_error_controller' => $this->router->fetch_class(),
 				'log_error_method' => $this->router->fetch_method(),
@@ -97,7 +97,7 @@ class Brand extends CI_Controller
 			$data = $this->BrandModel->Get($id);
 			echo json_encode(['status' => true, 'message' => 'Success', 'data' => $data]);
 		} catch (\Throwable $th) {
-			$helper = new Helper();
+			$helper = Helper::getInstance();
 			$data = array(
 				'log_error_controller' => $this->router->fetch_class(),
 				'log_error_method' => $this->router->fetch_method(),
@@ -115,7 +115,7 @@ class Brand extends CI_Controller
 			$this->BrandModel->Insert($data);
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {
-			$helper = new Helper();
+			$helper = Helper::getInstance();
 			$data = array(
 				'log_error_controller' => $this->router->fetch_class(),
 				'log_error_method' => $this->router->fetch_method(),
@@ -133,7 +133,7 @@ class Brand extends CI_Controller
 			$this->BrandModel->Update($data);
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {
-			$helper = new Helper();
+			$helper = Helper::getInstance();
 			$data = array(
 				'log_error_controller' => $this->router->fetch_class(),
 				'log_error_method' => $this->router->fetch_method(),
@@ -150,7 +150,7 @@ class Brand extends CI_Controller
 			$this->BrandModel->UpdateActive($id, $is_active);
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {
-			$helper = new Helper();
+			$helper = Helper::getInstance();
 			$data = array(
 				'log_error_controller' => $this->router->fetch_class(),
 				'log_error_method' => $this->router->fetch_method(),
@@ -167,7 +167,7 @@ class Brand extends CI_Controller
 			$this->BrandModel->Delete($id);
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {
-			$helper = new Helper();
+			$helper = Helper::getInstance();
 			$data = array(
 				'log_error_controller' => $this->router->fetch_class(),
 				'log_error_method' => $this->router->fetch_method(),

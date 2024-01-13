@@ -26,7 +26,7 @@ class EventsModel extends CI_Model
 
 	public function Insert($data)
 	{
-		$helper = new Helper();
+		$helper = Helper::getInstance();
 
 		$insert = array(
 			'event' => $helper->NullSafety($data['event']),
@@ -39,7 +39,7 @@ class EventsModel extends CI_Model
 
 	public function Update($data)
 	{
-		$helper = new Helper();
+		$helper = Helper::getInstance();
 		$update = array(
 			'role_name' => $helper->NullSafety($data['role_name']),
 			'role_status' => $helper->NullSafety($data['role_status']),
@@ -51,7 +51,7 @@ class EventsModel extends CI_Model
 
 	public function UpdateActive($id, $is_active)
 	{
-		$helper = new Helper();
+		$helper = Helper::getInstance();
 		$update = array(
 			'is_active' => $helper->NullSafety($is_active, 0),
 		);
@@ -66,7 +66,7 @@ class EventsModel extends CI_Model
 
 	public function Upload($data)
 	{
-		$helper = new Helper();
+		$helper = Helper::getInstance();
 		$banner = $helper->UploadImage('banner_file', './uploads/banner/', 10240, true);
 
 		if (!empty($banner['error'])) {

@@ -26,7 +26,7 @@ class VoucherModel extends CI_Model
 
 	public function Insert($data)
 	{
-		$helper = new Helper();
+		$helper = Helper::getInstance();
 
 		$insert = array(
 			'event_id' => $helper->NullSafety($data['event_id']),
@@ -39,7 +39,7 @@ class VoucherModel extends CI_Model
 
 	public function Update($data)
 	{
-		$helper = new Helper();
+		$helper = Helper::getInstance();
 		$update = array(
 			'voucher_code' => $helper->NullSafety($data['voucher_code']),
 			'market_place_id' => $helper->NullSafety($data['market_place_id']),

@@ -17,7 +17,7 @@ class Events extends CI_Controller
 
 	public function index()
 	{
-		$helper = new Helper();
+		$helper = Helper::getInstance();
 		$helper->IsLoggedIn();
 		$content['titleName'] = $this->titleName;
 		$content['js'] = 'js/EventsJs';
@@ -29,7 +29,7 @@ class Events extends CI_Controller
 
 	public function Detail($id)
 	{
-		$helper = new Helper();
+		$helper = Helper::getInstance();
 		$helper->IsLoggedIn();
 		$content['event'] = $this->EventsModel->Get($id);
 		$content['titleName'] = 'Voucher';
@@ -42,7 +42,7 @@ class Events extends CI_Controller
 
 	public function Datatable()
 	{
-		$helper = new Helper();
+		$helper = Helper::getInstance();
 		$table = $this->tableName;
 		$column_order = array('event', 'slug', 'is_active');
 		$column_search = array('event', 'slug', 'is_active');
@@ -99,7 +99,7 @@ class Events extends CI_Controller
 			$data = $this->EventsModel->GetAll();
 			echo json_encode(['status' => true, 'message' => 'Success', 'data' => $data]);
 		} catch (\Throwable $th) {
-			$helper = new Helper();
+			$helper = Helper::getInstance();
 			$data = array(
 				'log_error_controller' => $this->router->fetch_class(),
 				'log_error_method' => $this->router->fetch_method(),
@@ -116,7 +116,7 @@ class Events extends CI_Controller
 			$data = $this->EventsModel->Get($id);
 			echo json_encode(['status' => true, 'message' => 'Success', 'data' => $data]);
 		} catch (\Throwable $th) {
-			$helper = new Helper();
+			$helper = Helper::getInstance();
 			$data = array(
 				'log_error_controller' => $this->router->fetch_class(),
 				'log_error_method' => $this->router->fetch_method(),
@@ -144,7 +144,7 @@ class Events extends CI_Controller
 
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {
-			$helper = new Helper();
+			$helper = Helper::getInstance();
 			$data = array(
 				'log_error_controller' => $this->router->fetch_class(),
 				'log_error_method' => $this->router->fetch_method(),
@@ -162,7 +162,7 @@ class Events extends CI_Controller
 			$this->EventsModel->Update($data);
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {
-			$helper = new Helper();
+			$helper = Helper::getInstance();
 			$data = array(
 				'log_error_controller' => $this->router->fetch_class(),
 				'log_error_method' => $this->router->fetch_method(),
@@ -179,7 +179,7 @@ class Events extends CI_Controller
 			$this->EventsModel->UpdateActive($id, $is_active);
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {
-			$helper = new Helper();
+			$helper = Helper::getInstance();
 			$data = array(
 				'log_error_controller' => $this->router->fetch_class(),
 				'log_error_method' => $this->router->fetch_method(),
@@ -196,7 +196,7 @@ class Events extends CI_Controller
 			$this->EventsModel->Delete($id);
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {
-			$helper = new Helper();
+			$helper = Helper::getInstance();
 			$data = array(
 				'log_error_controller' => $this->router->fetch_class(),
 				'log_error_method' => $this->router->fetch_method(),

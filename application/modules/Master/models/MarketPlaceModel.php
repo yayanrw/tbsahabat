@@ -26,7 +26,7 @@ class MarketPlaceModel extends CI_Model
 
 	public function Insert($data)
 	{
-		$helper = new Helper();
+		$helper = Helper::getInstance();
 
 		$insert = array(
 			'market_place' => $helper->NullSafety($data['market_place']),
@@ -39,7 +39,7 @@ class MarketPlaceModel extends CI_Model
 
 	public function Update($data)
 	{
-		$helper = new Helper();
+		$helper = Helper::getInstance();
 		$update = array(
 			'market_place' => $helper->NullSafety($data['market_place']),
 			'is_active' => $helper->NullSafety($data['is_active']),

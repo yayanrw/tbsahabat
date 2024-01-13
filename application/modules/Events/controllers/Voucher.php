@@ -17,7 +17,7 @@ class Voucher extends CI_Controller
 
 	public function index()
 	{
-		$helper = new Helper();
+		$helper = Helper::getInstance();
 		$helper->IsLoggedIn();
 		$content['titleName'] = $this->titleName;
 		$content['js'] = 'js/VoucherJs';
@@ -29,7 +29,7 @@ class Voucher extends CI_Controller
 
 	public function Datatable()
 	{
-		$helper = new Helper();
+		$helper = Helper::getInstance();
 		$table = $this->viewName;
 		$column_order = array('voucher_code', 'market_place',);
 		$column_search = array('voucher_code', 'market_place',);
@@ -72,7 +72,7 @@ class Voucher extends CI_Controller
 			$data = $this->VoucherModel->GetAll();
 			echo json_encode(['status' => true, 'message' => 'Success', 'data' => $data]);
 		} catch (\Throwable $th) {
-			$helper = new Helper();
+			$helper = Helper::getInstance();
 			$data = array(
 				'log_error_controller' => $this->router->fetch_class(),
 				'log_error_method' => $this->router->fetch_method(),
@@ -89,7 +89,7 @@ class Voucher extends CI_Controller
 			$data = $this->VoucherModel->Get($id);
 			echo json_encode(['status' => true, 'message' => 'Success', 'data' => $data]);
 		} catch (\Throwable $th) {
-			$helper = new Helper();
+			$helper = Helper::getInstance();
 			$data = array(
 				'log_error_controller' => $this->router->fetch_class(),
 				'log_error_method' => $this->router->fetch_method(),
@@ -107,7 +107,7 @@ class Voucher extends CI_Controller
 			$this->VoucherModel->Insert($data);
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {
-			$helper = new Helper();
+			$helper = Helper::getInstance();
 			$data = array(
 				'log_error_controller' => $this->router->fetch_class(),
 				'log_error_method' => $this->router->fetch_method(),
@@ -125,7 +125,7 @@ class Voucher extends CI_Controller
 			$this->VoucherModel->Update($data);
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {
-			$helper = new Helper();
+			$helper = Helper::getInstance();
 			$data = array(
 				'log_error_controller' => $this->router->fetch_class(),
 				'log_error_method' => $this->router->fetch_method(),
@@ -142,7 +142,7 @@ class Voucher extends CI_Controller
 			$this->VoucherModel->Delete($id);
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {
-			$helper = new Helper();
+			$helper = Helper::getInstance();
 			$data = array(
 				'log_error_controller' => $this->router->fetch_class(),
 				'log_error_method' => $this->router->fetch_method(),

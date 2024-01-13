@@ -15,7 +15,7 @@ class Login extends CI_Controller
 
     public function index()
     {
-        $helper = new Helper();
+        $helper = Helper::getInstance();
         $helper->IsLoggedIn('login');
         $content['titleName'] = $this->titleName;
         $this->load->view('LoginView', $content);
@@ -33,7 +33,7 @@ class Login extends CI_Controller
             $data = $this->input->post();
             $this->LoginModel->AuthUser($data);
         } catch (\Throwable $th) {
-            $helper = new Helper();
+            $helper = Helper::getInstance();
             $data = array(
                 'log_error_controller' => $this->router->fetch_class(),
                 'log_error_method' => $this->router->fetch_method(),

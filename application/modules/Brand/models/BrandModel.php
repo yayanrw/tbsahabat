@@ -26,7 +26,7 @@ class BrandModel extends CI_Model
 
 	public function Insert($data)
 	{
-		$helper = new Helper();
+		$helper = Helper::getInstance();
 
 		$insert = array(
 			'brand' => $helper->NullSafety($data['brand']),
@@ -39,7 +39,7 @@ class BrandModel extends CI_Model
 
 	public function Update($data)
 	{
-		$helper = new Helper();
+		$helper = Helper::getInstance();
 		$update = array(
 			'brand' => $helper->NullSafety($data['brand']),
 			'img_url' => $helper->NullSafety($data['img_url']),
@@ -67,7 +67,7 @@ class BrandModel extends CI_Model
 
 	public function Upload($data)
 	{
-		$helper = new Helper();
+		$helper = Helper::getInstance();
 		$brand = $helper->UploadImage('img_url', './uploads/brands/', 10240, true);
 
 		if (!empty($brand['error'])) {

@@ -17,7 +17,7 @@ class Roles extends CI_Controller
 
     public function index()
     {
-        $helper = new Helper();
+        $helper = Helper::getInstance();
         $helper->IsLoggedIn();
         $content['titleName'] = $this->titleName;
         $content['js'] = 'js/RolesJs';
@@ -29,7 +29,7 @@ class Roles extends CI_Controller
 
     public function Datatable()
     {
-        $helper = new Helper();
+        $helper = Helper::getInstance();
         $table = $this->tableName;
         $column_order = array('role_name', 'redirect_to', 'role_status');
         $column_search = array('role_name', 'redirect_to', 'role_status');
@@ -78,7 +78,7 @@ class Roles extends CI_Controller
             $data = $this->RolesModel->GetAll();
             echo json_encode(['status' => true, 'message' => 'Success', 'data' => $data]);
         } catch (\Throwable $th) {
-            $helper = new Helper();
+            $helper = Helper::getInstance();
             $data = array(
                 'log_error_controller' => $this->router->fetch_class(),
                 'log_error_method' => $this->router->fetch_method(),
@@ -95,7 +95,7 @@ class Roles extends CI_Controller
             $data = $this->RolesModel->Get($id);
             echo json_encode(['status' => true, 'message' => 'Success', 'data' => $data]);
         } catch (\Throwable $th) {
-            $helper = new Helper();
+            $helper = Helper::getInstance();
             $data = array(
                 'log_error_controller' => $this->router->fetch_class(),
                 'log_error_method' => $this->router->fetch_method(),
@@ -113,7 +113,7 @@ class Roles extends CI_Controller
             $this->RolesModel->Insert($data);
             echo json_encode(['status' => true, 'message' => 'Success']);
         } catch (\Throwable $th) {
-            $helper = new Helper();
+            $helper = Helper::getInstance();
             $data = array(
                 'log_error_controller' => $this->router->fetch_class(),
                 'log_error_method' => $this->router->fetch_method(),
@@ -131,7 +131,7 @@ class Roles extends CI_Controller
             $this->RolesModel->Update($data);
             echo json_encode(['status' => true, 'message' => 'Success']);
         } catch (\Throwable $th) {
-            $helper = new Helper();
+            $helper = Helper::getInstance();
             $data = array(
                 'log_error_controller' => $this->router->fetch_class(),
                 'log_error_method' => $this->router->fetch_method(),
@@ -148,7 +148,7 @@ class Roles extends CI_Controller
             $this->RolesModel->Delete($id);
             echo json_encode(['status' => true, 'message' => 'Success']);
         } catch (\Throwable $th) {
-            $helper = new Helper();
+            $helper = Helper::getInstance();
             $data = array(
                 'log_error_controller' => $this->router->fetch_class(),
                 'log_error_method' => $this->router->fetch_method(),

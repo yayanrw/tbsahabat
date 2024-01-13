@@ -27,7 +27,7 @@ class UsersModel extends CI_Model
 
     public function Insert($data)
     {
-        $helper = new Helper();
+        $helper = Helper::getInstance();
 
         $insert = array(
             'user_name' => $helper->NullSafety($data['user_name']),
@@ -42,7 +42,7 @@ class UsersModel extends CI_Model
 
     public function Update($data)
     {
-        $helper = new Helper();
+        $helper = Helper::getInstance();
         $update = array(
             'user_name' => $helper->NullSafety($data['user_name']),
             'user_email' => $helper->NullSafety($data['user_email']),

@@ -26,7 +26,7 @@ class RolesModel extends CI_Model
 
     public function Insert($data)
     {
-        $helper = new Helper();
+        $helper = Helper::getInstance();
 
         $insert = array(
             'role_name' => $helper->NullSafety($data['role_name']),
@@ -38,7 +38,7 @@ class RolesModel extends CI_Model
 
     public function Update($data)
     {
-        $helper = new Helper();
+        $helper = Helper::getInstance();
         $update = array(
             'role_name' => $helper->NullSafety($data['role_name']),
             'role_status' => $helper->NullSafety($data['role_status']),

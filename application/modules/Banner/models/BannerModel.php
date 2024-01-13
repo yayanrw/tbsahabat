@@ -26,7 +26,7 @@ class BrandModel extends CI_Model
 
 	public function Insert($data)
 	{
-		$helper = new Helper();
+		$helper = Helper::getInstance();
 
 		$insert = array(
 			'title' => $helper->NullSafety($data['title']),
@@ -41,7 +41,7 @@ class BrandModel extends CI_Model
 
 	public function Update($data)
 	{
-		$helper = new Helper();
+		$helper = Helper::getInstance();
 		$update = array(
 			'title' => $helper->NullSafety($data['title']),
 			'sub_title' => $helper->NullSafety($data['sub_title']),
