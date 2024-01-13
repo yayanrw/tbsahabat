@@ -44,6 +44,7 @@ class BrandModel extends CI_Model
 			'brand' => $helper->NullSafety($data['brand']),
 			'img_url' => $helper->NullSafety($data['img_url']),
 			'is_active' => $helper->NullSafety($data['is_active']),
+			'updated_by' => $this->session->userdata('user_id'),
 		);
 		$this->db->where('id', $data['id']);
 		$this->db->update($this->tableName, $update);
@@ -53,6 +54,7 @@ class BrandModel extends CI_Model
 	{
 		$update = array(
 			'is_active' => $is_active,
+			'updated_by' => $this->session->userdata('user_id'),
 		);
 		$this->db->where('id', $id);
 		$this->db->update($this->tableName, $update);
@@ -61,6 +63,18 @@ class BrandModel extends CI_Model
 	public function Delete($id)
 	{
 		return $this->db->delete($this->tableName, ['id' => $id]);
+	}
+
+	public function Upload($data)
+	{
+		$helper = new Helper();
+		$brand = $helper->UploadImage('img_url', './uploads/brands/', 10240, true);
+
+		if (!empty($brand['error'])) {
+			$upload['error'] = $brand['error'];
+		}
+		$upload['brand'] = $brand['upload'];
+		return $upload;
 	}
 }
 
