@@ -6,10 +6,16 @@ require_once APPPATH . '../system/core/Model.php';
 
 class Helper extends CI_Model
 {
+	private static $instance;
+
 	public function __construct()
 	{
+		if (self::$instance !== null) {
+			throw new Exception("Singleton instance already exists. Use Helper::getInstance() to get the instance.");
+		}
 		parent::__construct();
 		$this->load->library('image_lib');
+		self::$instance = $this;
 	}
 	// Start Datatable
 	public function _get_datatables_query($table, $column_order, $column_search, $orderby, $where = null)
@@ -209,6 +215,15 @@ class Helper extends CI_Model
 	public function toRupiah($number)
 	{
 		return 'Rp ' . number_format($number, 0, ',', '.');
+	}
+
+	public static function getInstance()
+	{
+		if (self::$instance === null) {
+			self::$instance = new Helper();
+		}
+
+		return self::$instance;
 	}
 }
 
