@@ -6,13 +6,13 @@
 		loadDataTable()
 		$('#form').validate({
 			rules: {
-				market_place: {
+				brand: {
 					required: true,
 				},
 				is_active: {
 					required: true,
 				},
-				logo: {
+				img_url: {
 					required: true,
 				},
 			}
