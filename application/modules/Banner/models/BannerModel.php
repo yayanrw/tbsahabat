@@ -3,7 +3,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 require_once APPPATH . 'core/Helper.php';
 
-class BrandModel extends CI_Model
+class BannerModel extends CI_Model
 {
 	private $tableName = 'm_banner';
 
@@ -42,14 +42,25 @@ class BrandModel extends CI_Model
 	public function Update($data)
 	{
 		$helper = Helper::getInstance();
-		$update = array(
-			'title' => $helper->NullSafety($data['title']),
-			'sub_title' => $helper->NullSafety($data['sub_title']),
-			'description' => $helper->NullSafety($data['description']),
-			'img_url' => $helper->NullSafety($data['img_url']),
-			'is_active' => $helper->NullSafety($data['is_active']),
-			'updated_by' => $this->session->userdata('user_id'),
-		);
+
+		if (empty($data['img_url'])) {
+			$update = array(
+				'title' => $helper->NullSafety($data['title']),
+				'sub_title' => $helper->NullSafety($data['sub_title']),
+				'description' => $helper->NullSafety($data['description']),
+				'is_active' => $helper->NullSafety($data['is_active']),
+				'updated_by' => $this->session->userdata('user_id'),
+			);
+		} else {
+			$update = array(
+				'title' => $helper->NullSafety($data['title']),
+				'sub_title' => $helper->NullSafety($data['sub_title']),
+				'description' => $helper->NullSafety($data['description']),
+				'img_url' => $helper->NullSafety($data['img_url']),
+				'is_active' => $helper->NullSafety($data['is_active']),
+				'updated_by' => $this->session->userdata('user_id'),
+			);
+		}
 		$this->db->where('id', $data['id']);
 		$this->db->update($this->tableName, $update);
 	}
@@ -67,6 +78,18 @@ class BrandModel extends CI_Model
 	public function Delete($id)
 	{
 		return $this->db->delete($this->tableName, ['id' => $id]);
+	}
+
+	public function Upload($data)
+	{
+		$helper = Helper::getInstance();
+		$banner = $helper->UploadImage('img_url', './uploads/banners/', 10240, false);
+
+		if (!empty($banner['error'])) {
+			$upload['error'] = $banner['error'];
+		}
+		$upload['banner'] = $banner['upload'];
+		return $upload;
 	}
 }
 

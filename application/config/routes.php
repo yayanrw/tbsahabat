@@ -78,6 +78,15 @@ $route['brands/insert'] = 'Brand/Insert';
 $route['brands/update'] = 'Brand/Update';
 $route['brands/delete/(:num)'] = 'Brand/Delete/$1';
 
+$route['banners'] = 'Banner';
+$route['banners/update-active/(:num)/(:num)'] = 'Banner/UpdateActive/$1/$2';
+$route['banners/get-all'] = 'Banner/GetAll';
+$route['banners/datatable'] = 'Banner/Datatable';
+$route['banners/get/(:num)'] = 'Banner/Get/$1';
+$route['banners/insert'] = 'Banner/Insert';
+$route['banners/update'] = 'Banner/Update';
+$route['banners/delete/(:num)'] = 'Banner/Delete/$1';
+
 $route['master/users'] = 'Master/Users';
 $route['master/users/get-all'] = 'Master/Users/GetAll';
 $route['master/users/datatable'] = 'Master/Users/Datatable';

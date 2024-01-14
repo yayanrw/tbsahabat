@@ -12,7 +12,7 @@ class Banner extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('BrandModel');
+		$this->load->model('BannerModel');
 	}
 
 	public function index()
@@ -20,10 +20,10 @@ class Banner extends CI_Controller
 		$helper = Helper::getInstance();
 		$helper->IsLoggedIn();
 		$content['titleName'] = $this->titleName;
-		$content['js'] = 'js/BrandJs';
+		$content['js'] = 'js/BannerJs';
 
 		$this->load->view('Layout/HeaderView', $content);
-		$this->load->view('BrandView', $content);
+		$this->load->view('BannerView', $content);
 		$this->load->view('Layout/FooterView', $content);
 	}
 
@@ -31,9 +31,9 @@ class Banner extends CI_Controller
 	{
 		$helper = Helper::getInstance();
 		$table = $this->tableName;
-		$column_order = array('Banner', 'is_active');
-		$column_search = array('Banner', 'is_active');
-		$orderby = array('Banner' => 'asc');
+		$column_order = array('title', 'sub_title', 'is_active');
+		$column_search = array('title', 'sub_title', 'is_active');
+		$orderby = array('title' => 'asc');
 		$where = null;
 		$list = $helper->get_datatables($table, $column_order, $column_search, $orderby, $where);
 		$data = array();
@@ -42,7 +42,8 @@ class Banner extends CI_Controller
 		foreach ($list as $key) {
 			$row = array();
 			$row[] = ++$no;
-			$row[] = $key->Banner;
+			$row[] = $key->title;
+			$row[] = $key->sub_title;
 
 			if ($key->is_active == '1') {
 				$row[] = '<span class="badge badge-success">Active</span>';
@@ -51,13 +52,16 @@ class Banner extends CI_Controller
 			}
 
 			$action = '
-            <div class="text-center">';
-
+            <div class="text-center">
+                <button type="button" title="View Detail" class="btn btn-primary btn-icon btn-sm " onclick="btnView(\'' . $key->id . '\')"><i class="fa-solid fa-eye"></i></button> ';
+			$action .= '<a href="' . base_url("uploads/banners/$key->img_url") . '"  target="_blank" title="Preview" class="btn btn-info btn-icon btn-sm "><i class="fa-solid fa-image"></i></a> ';
+			$action .= '<button type="button" title="Edit" class="btn btn-warning btn-icon btn-sm " onclick="btnEdit(\'' . $key->id . '\')"><i class="fa-solid fa-pen-to-square"></i></button> ';
 			if ($key->is_active == '0') {
-				$action .= '<button type="button" title="Acive/Inactive" class="btn btn-dark btn-icon btn-sm " onclick="btnActive(\'' . $key->id . '\', 1)"><i class="fa-solid fa-toggle-off"></i></button>';
+				$action .= '<button type="button" title="Acive/Inactive" class="btn btn-dark btn-icon btn-sm " onclick="btnActive(\'' . $key->id . '\', 1)"><i class="fa-solid fa-toggle-off"></i></button> ';
 			} else {
-				$action .= '<button type="button" title="Acive/Inactive" class="btn btn-light btn-icon btn-sm " onclick="btnActive(\'' . $key->id . '\', 0)"><i class="fa-solid fa-toggle-on"></i></button>';
+				$action .= '<button type="button" title="Acive/Inactive" class="btn btn-light btn-icon btn-sm " onclick="btnActive(\'' . $key->id . '\', 0)"><i class="fa-solid fa-toggle-on"></i></button> ';
 			}
+			$action .= '<button type="button" title="Delete" class="btn btn-danger btn-icon btn-sm " onclick="btnDelete(\'' . $key->id . '\')"><i class="fa-solid fa-trash-can"></i></button>';
 			$action .= '</div>';
 
 			$row[] = $action;
@@ -77,7 +81,7 @@ class Banner extends CI_Controller
 	public function GetAll()
 	{
 		try {
-			$data = $this->BrandModel->GetAll();
+			$data = $this->BannerModel->GetAll();
 			echo json_encode(['status' => true, 'message' => 'Success', 'data' => $data]);
 		} catch (\Throwable $th) {
 			$helper = Helper::getInstance();
@@ -94,7 +98,7 @@ class Banner extends CI_Controller
 	public function Get($id)
 	{
 		try {
-			$data = $this->BrandModel->Get($id);
+			$data = $this->BannerModel->Get($id);
 			echo json_encode(['status' => true, 'message' => 'Success', 'data' => $data]);
 		} catch (\Throwable $th) {
 			$helper = Helper::getInstance();
@@ -112,7 +116,17 @@ class Banner extends CI_Controller
 	{
 		try {
 			$data = $this->input->post();
-			$this->BrandModel->Insert($data);
+
+			$upload = $this->BannerModel->Upload($data);
+
+			if (!empty($upload['error'])) {
+				echo json_encode(['status' => false, 'message' => $upload['error']]);
+				return;
+			}
+
+			$data['img_url'] = $upload['banner']['upload_data']['file_name'];
+			$this->BannerModel->Insert($data);
+
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {
 			$helper = Helper::getInstance();
@@ -130,7 +144,19 @@ class Banner extends CI_Controller
 	{
 		try {
 			$data = $this->input->post();
-			$this->BrandModel->Update($data);
+
+			$upload = $this->BannerModel->Upload($data);
+
+			if (!empty($upload['error'])) {
+				echo json_encode(['status' => false, 'message' => $upload['error']]);
+				return;
+			}
+
+			if (!empty($upload['banner'])) {
+				$data['img_url'] = $upload['banner']['upload_data']['file_name'];
+			}
+
+			$this->BannerModel->Update($data);
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {
 			$helper = Helper::getInstance();
@@ -147,7 +173,7 @@ class Banner extends CI_Controller
 	public function UpdateActive($id, $is_active)
 	{
 		try {
-			$this->BrandModel->UpdateActive($id, $is_active);
+			$this->BannerModel->UpdateActive($id, $is_active);
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {
 			$helper = Helper::getInstance();
@@ -164,7 +190,7 @@ class Banner extends CI_Controller
 	public function Delete($id)
 	{
 		try {
-			$this->BrandModel->Delete($id);
+			$this->BannerModel->Delete($id);
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {
 			$helper = Helper::getInstance();

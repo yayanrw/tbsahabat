@@ -104,10 +104,11 @@
 			.then(res => {
 				Swal.close()
 				if (res.status) {
-					$('#role_id').val(res.data.role_id)
-					$('#role_name').val(res.data.role_name)
-					$('#role_status').val(res.data.role_status)
-					$('#redirect_to').val(res.data.redirect_to)
+					$('#id').val(res.data.id)
+					$('#title').val(res.data.title)
+					$('#sub_title').val(res.data.sub_title)
+					$('#description').val(res.data.description)
+					$('#is_active').val(res.data.is_active)
 					$('#btnSubmit').html('Update')
 					scrollToTop()
 				} else {
@@ -148,10 +149,11 @@
 				console.log(res);
 				Swal.close()
 				if (res.status) {
-					$('#role_id').val(res.data.role_id)
-					$('#role_name').val(res.data.role_name)
-					$('#role_status').val(res.data.role_status)
-					$('#redirect_to').val(res.data.redirect_to)
+					$('#id').val(res.data.id)
+					$('#title').val(res.data.title)
+					$('#sub_title').val(res.data.sub_title)
+					$('#description').val(res.data.description)
+					$('#is_active').val(res.data.is_active)
 					$('#btnSubmit').html('Update')
 					scrollToTop()
 				} else {
