@@ -87,6 +87,15 @@ $route['banners/insert'] = 'Banner/Insert';
 $route['banners/update'] = 'Banner/Update';
 $route['banners/delete/(:num)'] = 'Banner/Delete/$1';
 
+$route['social-medias'] = 'SocialMedia';
+$route['social-medias/update-active/(:num)/(:num)'] = 'SocialMedia/UpdateActive/$1/$2';
+$route['social-medias/get-all'] = 'SocialMedia/GetAll';
+$route['social-medias/datatable'] = 'SocialMedia/Datatable';
+$route['social-medias/get/(:num)'] = 'SocialMedia/Get/$1';
+$route['social-medias/insert'] = 'SocialMedia/Insert';
+$route['social-medias/update'] = 'SocialMedia/Update';
+$route['social-medias/delete/(:num)'] = 'SocialMedia/Delete/$1';
+
 $route['master/users'] = 'Master/Users';
 $route['master/users/get-all'] = 'Master/Users/GetAll';
 $route['master/users/datatable'] = 'Master/Users/Datatable';
