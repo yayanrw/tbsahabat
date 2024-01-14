@@ -51,13 +51,16 @@ class Brand extends CI_Controller
 			}
 
 			$action = '
-            <div class="text-center">';
-
+            <div class="text-center">
+                <button type="button" title="View Detail" class="btn btn-primary btn-icon btn-sm " onclick="btnView(\'' . $key->id . '\')"><i class="fa-solid fa-eye"></i></button> ';
+			$action .= '<a href="' . base_url("uploads/brands/$key->img_url") . '"  target="_blank" title="Preview" class="btn btn-info btn-icon btn-sm "><i class="fa-solid fa-image"></i></a> ';
+			$action .= '<button type="button" title="Edit" class="btn btn-warning btn-icon btn-sm " onclick="btnEdit(\'' . $key->id . '\')"><i class="fa-solid fa-pen-to-square"></i></button> ';
 			if ($key->is_active == '0') {
-				$action .= '<button type="button" title="Acive/Inactive" class="btn btn-dark btn-icon btn-sm " onclick="btnActive(\'' . $key->id . '\', 1)"><i class="fa-solid fa-toggle-off"></i></button>';
+				$action .= '<button type="button" title="Acive/Inactive" class="btn btn-dark btn-icon btn-sm " onclick="btnActive(\'' . $key->id . '\', 1)"><i class="fa-solid fa-toggle-off"></i></button> ';
 			} else {
-				$action .= '<button type="button" title="Acive/Inactive" class="btn btn-light btn-icon btn-sm " onclick="btnActive(\'' . $key->id . '\', 0)"><i class="fa-solid fa-toggle-on"></i></button>';
+				$action .= '<button type="button" title="Acive/Inactive" class="btn btn-light btn-icon btn-sm " onclick="btnActive(\'' . $key->id . '\', 0)"><i class="fa-solid fa-toggle-on"></i></button> ';
 			}
+			$action .= '<button type="button" title="Delete" class="btn btn-danger btn-icon btn-sm " onclick="btnDelete(\'' . $key->id . '\')"><i class="fa-solid fa-trash-can"></i></button>';
 			$action .= '</div>';
 
 			$row[] = $action;
@@ -112,7 +115,17 @@ class Brand extends CI_Controller
 	{
 		try {
 			$data = $this->input->post();
+
+			$upload = $this->BrandModel->Upload($data);
+
+			if (!empty($upload['error'])) {
+				echo json_encode(['status' => false, 'message' => $upload['error']]);
+				return;
+			}
+
+			$data['img_url'] = $upload['brand']['upload_data']['file_name'];
 			$this->BrandModel->Insert($data);
+
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {
 			$helper = Helper::getInstance();
@@ -130,6 +143,18 @@ class Brand extends CI_Controller
 	{
 		try {
 			$data = $this->input->post();
+
+			$upload = $this->BrandModel->Upload($data);
+
+			if (!empty($upload['error'])) {
+				echo json_encode(['status' => false, 'message' => $upload['error']]);
+				return;
+			}
+
+			if (!empty($upload['brand'])) {
+				$data['img_url'] = $upload['brand']['upload_data']['file_name'];
+			}
+
 			$this->BrandModel->Update($data);
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {

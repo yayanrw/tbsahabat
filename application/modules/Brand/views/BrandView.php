@@ -19,7 +19,7 @@
 							<div class="mb-3">
 								<label for="brand" class="form-label">Brand</label>
 								<input type="hidden" id="id" name="id">
-								<input type="text" class="form-control" id="brand" name="brand" placeholder="Role">
+								<input type="text" class="form-control" id="brand" name="brand" placeholder="Brand">
 							</div>
 						</div>
 						<div class="col-md-4">

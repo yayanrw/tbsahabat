@@ -40,12 +40,21 @@ class BrandModel extends CI_Model
 	public function Update($data)
 	{
 		$helper = Helper::getInstance();
-		$update = array(
-			'brand' => $helper->NullSafety($data['brand']),
-			'img_url' => $helper->NullSafety($data['img_url']),
-			'is_active' => $helper->NullSafety($data['is_active']),
-			'updated_by' => $this->session->userdata('user_id'),
-		);
+
+		if (empty($data['img_url'])) {
+			$update = array(
+				'brand' => $helper->NullSafety($data['brand']),
+				'is_active' => $helper->NullSafety($data['is_active']),
+				'updated_by' => $this->session->userdata('user_id'),
+			);
+		} else {
+			$update = array(
+				'brand' => $helper->NullSafety($data['brand']),
+				'img_url' => $helper->NullSafety($data['img_url']),
+				'is_active' => $helper->NullSafety($data['is_active']),
+				'updated_by' => $this->session->userdata('user_id'),
+			);
+		}
 		$this->db->where('id', $data['id']);
 		$this->db->update($this->tableName, $update);
 	}
@@ -68,7 +77,7 @@ class BrandModel extends CI_Model
 	public function Upload($data)
 	{
 		$helper = Helper::getInstance();
-		$brand = $helper->UploadImage('img_url', './uploads/brands/', 10240, true);
+		$brand = $helper->UploadImage('img_url', './uploads/brands/', 10240, false);
 
 		if (!empty($brand['error'])) {
 			$upload['error'] = $brand['error'];
