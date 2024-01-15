@@ -126,7 +126,7 @@ class ProductGroup extends CI_Controller
 				return;
 			}
 
-			$data['img_url'] = $upload['sub_category']['upload_data']['file_name'];
+			$data['img_url'] = $upload['group']['upload_data']['file_name'];
 			$this->ProductGroupModel->Insert($data);
 
 			echo json_encode(['status' => true, 'message' => 'Success']);
@@ -154,8 +154,8 @@ class ProductGroup extends CI_Controller
 				return;
 			}
 
-			if (!empty($upload['sub_category'])) {
-				$data['img_url'] = $upload['sub_category']['upload_data']['file_name'];
+			if (!empty($upload['group'])) {
+				$data['img_url'] = $upload['group']['upload_data']['file_name'];
 			}
 
 			$this->ProductGroupModel->Update($data);

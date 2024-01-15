@@ -125,3 +125,12 @@ $route['admin/sub-categories/get/(:num)'] = 'ProductCategory/ProductSubCategory/
 $route['admin/sub-categories/insert'] = 'ProductCategory/ProductSubCategory/Insert';
 $route['admin/sub-categories/update'] = 'ProductCategory/ProductSubCategory/Update';
 $route['admin/sub-categories/delete/(:num)'] = 'ProductCategory/ProductSubCategory/Delete/$1';
+
+$route['admin/sub-categories/(:num)/groups'] = 'ProductCategory/ProductGroup/Show/$1';
+$route['admin/groups/update-active/(:num)/(:num)'] = 'ProductCategory/ProductGroup/UpdateActive/$1/$2';
+$route['admin/groups/get-all'] = 'ProductCategory/ProductGroup/GetAll';
+$route['admin/groups/datatable'] = 'ProductCategory/ProductGroup/Datatable';
+$route['admin/groups/get/(:num)'] = 'ProductCategory/ProductGroup/Get/$1';
+$route['admin/groups/insert'] = 'ProductCategory/ProductGroup/Insert';
+$route['admin/groups/update'] = 'ProductCategory/ProductGroup/Update';
+$route['admin/groups/delete/(:num)'] = 'ProductCategory/ProductGroup/Delete/$1';

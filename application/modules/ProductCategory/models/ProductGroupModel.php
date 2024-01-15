@@ -29,7 +29,7 @@ class ProductGroupModel extends CI_Model
 		$helper = Helper::getInstance();
 
 		$insert = array(
-			'product_group_id' => $helper->NullSafety($data['product_group_id'], 0),
+			'product_sub_category_id' => $helper->NullSafety($data['product_sub_category_id'], 0),
 			'group' => $helper->NullSafety($data['group']),
 			'img_url' => $helper->NullSafety($data['img_url']),
 			'is_active' => $helper->NullSafety($data['is_active']),

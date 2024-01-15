@@ -30,7 +30,7 @@
 				Swal.close()
 				if (res.status) {
 					$('#product_sub_category_id').val(res.data.id)
-					$('#text_product_sub_category').text(res.data.category)
+					$('#text_product_sub_category').text(res.data.sub_category)
 					scrollToTop()
 				} else {
 					swalError(res.message)
