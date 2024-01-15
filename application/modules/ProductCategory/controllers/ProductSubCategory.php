@@ -46,7 +46,7 @@ class ProductSubCategory extends CI_Controller
 		foreach ($list as $key) {
 			$row = array();
 			$row[] = ++$no;
-			$row[] = $key->sub_sub_category;
+			$row[] = $key->sub_category;
 
 			if ($key->is_active == '1') {
 				$row[] = '<span class="badge badge-success">Active</span>';

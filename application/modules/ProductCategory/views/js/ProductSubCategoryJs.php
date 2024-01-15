@@ -1,9 +1,11 @@
 <script>
 	const BASE_URL = "<?= base_url() ?>";
 	const CURRENT_URL = "<?= base_url(uri_string()); ?>";
+	const CUSTOM_URL = "<?= base_url('admin/sub-categories'); ?>";
 
 	$(document).ready(function() {
 		loadDataTable()
+		loadProductCategory()
 		$('#form').validate({
 			rules: {
 				product_category_id: {
@@ -19,6 +21,24 @@
 		})
 	});
 
+	const loadProductCategory = () => {
+		fetch(`${BASE_URL}/admin/categories/get/<?= $product_category_id ?>`, {
+				method: 'GET'
+			})
+			.then(response => response.json())
+			.then(res => {
+				Swal.close()
+				if (res.status) {
+					$('#product_category_id').val(res.data.id)
+					$('#text_product_category').text(res.data.category)
+					scrollToTop()
+				} else {
+					swalError(res.message)
+				}
+			})
+			.catch(error => swalError(error))
+	}
+
 	const loadDataTable = () => {
 		$('#table-data').DataTable({
 			"destroy": true,
@@ -27,7 +47,7 @@
 			"responsive": true,
 			"order": [],
 			"ajax": {
-				"url": `${CURRENT_URL}/datatable`,
+				"url": `${CUSTOM_URL}/datatable`,
 				"type": "POST",
 				"data": {
 					'product_category_id': <?= $product_category_id; ?>
@@ -53,7 +73,7 @@
 				confirmationDialog('insert', function(callBack) {
 					if (callBack) {
 						Swal.showLoading()
-						fetch(`${CURRENT_URL}/insert`, {
+						fetch(`${CUSTOM_URL}/insert`, {
 								method: 'POST',
 								body: new FormData(form[0])
 							})
@@ -74,7 +94,7 @@
 				confirmationDialog('update', function(callBack) {
 					if (callBack) {
 						Swal.showLoading()
-						fetch(`${CURRENT_URL}/update`, {
+						fetch(`${CUSTOM_URL}/update`, {
 								method: 'POST',
 								body: new FormData(form[0])
 							})
@@ -97,7 +117,7 @@
 
 	const btnActive = (id, is_active) => {
 		Swal.showLoading()
-		fetch(`${CURRENT_URL}/update-active/${id}/${is_active}`, {
+		fetch(`${CUSTOM_URL}/update-active/${id}/${is_active}`, {
 				method: 'POST',
 			})
 			.then(response => response.json())
@@ -118,7 +138,7 @@
 		formReset()
 
 		Swal.showLoading()
-		fetch(`${CURRENT_URL}/get/${id}`, {
+		fetch(`${CUSTOM_URL}/get/${id}`, {
 				method: 'GET'
 			})
 			.then(response => response.json())
@@ -143,7 +163,7 @@
 		confirmationDialog('delete', function(callBack) {
 			if (callBack) {
 				Swal.showLoading()
-				fetch(`${CURRENT_URL}/delete/${id}`, {
+				fetch(`${CUSTOM_URL}/delete/${id}`, {
 						method: 'GET'
 					})
 					.then(response => response.json())
