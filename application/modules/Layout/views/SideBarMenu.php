@@ -54,7 +54,7 @@ $currentRole = $this->session->userdata('role_id');
 				<a href="<?= base_url('admin/brands') ?>" class="<?= $segment == 'admin/brands' ? 'active' : ''; ?>"><i class="material-icons-two-tone">branding_watermark</i> Brands</a>
 			</li>
 			<li>
-				<a href="<?= base_url('admin/product-categories') ?>" class="<?= $segment == 'admin/product-categories' ? 'active' : ''; ?>"><i class="material-icons-two-tone">category</i> Product Categories</a>
+				<a href="<?= base_url('admin/categories') ?>" class="<?= $segment == 'admin/categories' ? 'active' : ''; ?>"><i class="material-icons-two-tone">category</i> Product Categories</a>
 			</li>
 			<li>
 				<a href="<?= base_url('admin/products') ?>" class="<?= $segment == 'admin/products' ? 'active' : ''; ?>"><i class="material-icons-two-tone">inventory_2</i> Products</a>
