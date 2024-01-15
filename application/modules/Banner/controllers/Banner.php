@@ -57,9 +57,9 @@ class Banner extends CI_Controller
 			$action .= '<a href="' . base_url("uploads/banners/$key->img_url") . '"  target="_blank" title="Preview" class="btn btn-info btn-icon btn-sm "><i class="fa-solid fa-image"></i></a> ';
 			$action .= '<button type="button" title="Edit" class="btn btn-warning btn-icon btn-sm " onclick="btnEdit(\'' . $key->id . '\')"><i class="fa-solid fa-pen-to-square"></i></button> ';
 			if ($key->is_active == '0') {
-				$action .= '<button type="button" title="Acive/Inactive" class="btn btn-dark btn-icon btn-sm " onclick="btnActive(\'' . $key->id . '\', 1)"><i class="fa-solid fa-toggle-off"></i></button> ';
+				$action .= '<button type="button" title="Active/Inactive" class="btn btn-dark btn-icon btn-sm " onclick="btnActive(\'' . $key->id . '\', 1)"><i class="fa-solid fa-toggle-off"></i></button> ';
 			} else {
-				$action .= '<button type="button" title="Acive/Inactive" class="btn btn-light btn-icon btn-sm " onclick="btnActive(\'' . $key->id . '\', 0)"><i class="fa-solid fa-toggle-on"></i></button> ';
+				$action .= '<button type="button" title="Active/Inactive" class="btn btn-light btn-icon btn-sm " onclick="btnActive(\'' . $key->id . '\', 0)"><i class="fa-solid fa-toggle-on"></i></button> ';
 			}
 			$action .= '<button type="button" title="Delete" class="btn btn-danger btn-icon btn-sm " onclick="btnDelete(\'' . $key->id . '\')"><i class="fa-solid fa-trash-can"></i></button>';
 			$action .= '</div>';

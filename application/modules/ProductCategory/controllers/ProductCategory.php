@@ -3,16 +3,16 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 require_once APPPATH . 'core/Helper.php';
 
-class Events extends CI_Controller
+class ProductCategory extends CI_Controller
 {
-	private $titleName = 'Events';
-	private $tableName = 't_events';
+	private $titleName = 'ProductCategory';
+	private $tableName = 'm_product_category';
 	private $viewName = '';
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('EventsModel');
+		$this->load->model('ProductCategoryModel');
 	}
 
 	public function index()
@@ -20,23 +20,10 @@ class Events extends CI_Controller
 		$helper = Helper::getInstance();
 		$helper->IsLoggedIn();
 		$content['titleName'] = $this->titleName;
-		$content['js'] = 'js/EventsJs';
+		$content['js'] = 'js/ProductCategoryJs';
 
 		$this->load->view('Layout/HeaderView', $content);
-		$this->load->view('EventsView', $content);
-		$this->load->view('Layout/FooterView', $content);
-	}
-
-	public function Detail($id)
-	{
-		$helper = Helper::getInstance();
-		$helper->IsLoggedIn();
-		$content['event'] = $this->EventsModel->Get($id);
-		$content['titleName'] = 'Voucher';
-		$content['js'] = 'js/VoucherJs';
-
-		$this->load->view('Layout/HeaderView', $content);
-		$this->load->view('VoucherView', $content);
+		$this->load->view('ProductCategoryView', $content);
 		$this->load->view('Layout/FooterView', $content);
 	}
 
@@ -44,9 +31,9 @@ class Events extends CI_Controller
 	{
 		$helper = Helper::getInstance();
 		$table = $this->tableName;
-		$column_order = array('event', 'slug', 'is_active');
-		$column_search = array('event', 'slug', 'is_active');
-		$orderby = array('created_at' => 'desc');
+		$column_order = array('category', 'is_active');
+		$column_search = array('category', 'is_active');
+		$orderby = array('category' => 'asc');
 		$where = null;
 		$list = $helper->get_datatables($table, $column_order, $column_search, $orderby, $where);
 		$data = array();
@@ -55,9 +42,7 @@ class Events extends CI_Controller
 		foreach ($list as $key) {
 			$row = array();
 			$row[] = ++$no;
-
-			$row[] = $key->event;
-			$row[] = $key->slug;
+			$row[] = $key->category;
 
 			if ($key->is_active == '1') {
 				$row[] = '<span class="badge badge-success">Active</span>';
@@ -68,18 +53,17 @@ class Events extends CI_Controller
 			$action = '
             <div class="text-center">
                 <button type="button" title="View Detail" class="btn btn-primary btn-icon btn-sm " onclick="btnView(\'' . $key->id . '\')"><i class="fa-solid fa-eye"></i></button> ';
-
+			$action .= '<a href="' . base_url("uploads/categories/$key->img_url") . '"  target="_blank" title="Preview" class="btn btn-info btn-icon btn-sm "><i class="fa-solid fa-image"></i></a> ';
+			$action .= '<button type="button" title="Edit" class="btn btn-warning btn-icon btn-sm " onclick="btnEdit(\'' . $key->id . '\')"><i class="fa-solid fa-pen-to-square"></i></button> ';
 			if ($key->is_active == '0') {
 				$action .= '<button type="button" title="Active/Inactive" class="btn btn-dark btn-icon btn-sm " onclick="btnActive(\'' . $key->id . '\', 1)"><i class="fa-solid fa-toggle-off"></i></button> ';
 			} else {
 				$action .= '<button type="button" title="Active/Inactive" class="btn btn-light btn-icon btn-sm " onclick="btnActive(\'' . $key->id . '\', 0)"><i class="fa-solid fa-toggle-on"></i></button> ';
 			}
-
-			$action .= '<a href="' . base_url("e/$key->slug") . '"  target="_blank" title="Preview" class="btn btn-warning btn-icon btn-sm "><i class="fa-solid fa-link"></i></a>';
-
+			$action .= '<button type="button" title="Delete" class="btn btn-danger btn-icon btn-sm " onclick="btnDelete(\'' . $key->id . '\')"><i class="fa-solid fa-trash-can"></i></button>';
 			$action .= '</div>';
-			$row[] = $action;
 
+			$row[] = $action;
 			$data[] = $row;
 		}
 
@@ -96,7 +80,7 @@ class Events extends CI_Controller
 	public function GetAll()
 	{
 		try {
-			$data = $this->EventsModel->GetAll();
+			$data = $this->ProductCategoryModel->GetAll();
 			echo json_encode(['status' => true, 'message' => 'Success', 'data' => $data]);
 		} catch (\Throwable $th) {
 			$helper = Helper::getInstance();
@@ -113,7 +97,7 @@ class Events extends CI_Controller
 	public function Get($id)
 	{
 		try {
-			$data = $this->EventsModel->Get($id);
+			$data = $this->ProductCategoryModel->Get($id);
 			echo json_encode(['status' => true, 'message' => 'Success', 'data' => $data]);
 		} catch (\Throwable $th) {
 			$helper = Helper::getInstance();
@@ -132,15 +116,15 @@ class Events extends CI_Controller
 		try {
 			$data = $this->input->post();
 
-			$upload = $this->EventsModel->Upload($data);
+			$upload = $this->ProductCategoryModel->Upload($data);
 
 			if (!empty($upload['error'])) {
 				echo json_encode(['status' => false, 'message' => $upload['error']]);
 				return;
 			}
 
-			$data['banner_file'] = $upload['banner']['upload_data']['file_name'];
-			$this->EventsModel->Insert($data);
+			$data['img_url'] = $upload['category']['upload_data']['file_name'];
+			$this->ProductCategoryModel->Insert($data);
 
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {
@@ -159,7 +143,19 @@ class Events extends CI_Controller
 	{
 		try {
 			$data = $this->input->post();
-			$this->EventsModel->Update($data);
+
+			$upload = $this->ProductCategoryModel->Upload($data);
+
+			if (!empty($upload['error'])) {
+				echo json_encode(['status' => false, 'message' => $upload['error']]);
+				return;
+			}
+
+			if (!empty($upload['category'])) {
+				$data['img_url'] = $upload['category']['upload_data']['file_name'];
+			}
+
+			$this->ProductCategoryModel->Update($data);
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {
 			$helper = Helper::getInstance();
@@ -176,7 +172,7 @@ class Events extends CI_Controller
 	public function UpdateActive($id, $is_active)
 	{
 		try {
-			$this->EventsModel->UpdateActive($id, $is_active);
+			$this->ProductCategoryModel->UpdateActive($id, $is_active);
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {
 			$helper = Helper::getInstance();
@@ -193,7 +189,7 @@ class Events extends CI_Controller
 	public function Delete($id)
 	{
 		try {
-			$this->EventsModel->Delete($id);
+			$this->ProductCategoryModel->Delete($id);
 			echo json_encode(['status' => true, 'message' => 'Success']);
 		} catch (\Throwable $th) {
 			$helper = Helper::getInstance();
