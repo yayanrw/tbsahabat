@@ -29,6 +29,7 @@ class ProductSubCategoryModel extends CI_Model
 		$helper = Helper::getInstance();
 
 		$insert = array(
+			'product_category_id' => $helper->NullSafety($data['product_category_id'], 0),
 			'sub_category' => $helper->NullSafety($data['sub_category']),
 			'img_url' => $helper->NullSafety($data['img_url']),
 			'is_active' => $helper->NullSafety($data['is_active']),
