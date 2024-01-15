@@ -15,12 +15,14 @@ class ProductSubCategory extends CI_Controller
 		$this->load->model('ProductSubCategoryModel');
 	}
 
-	public function index()
+	public function Show($product_category_id)
 	{
 		$helper = Helper::getInstance();
 		$helper->IsLoggedIn();
 		$content['titleName'] = $this->titleName;
 		$content['js'] = 'js/ProductSubCategoryJs';
+
+		$content['product_category_id'] = $product_category_id;
 
 		$this->load->view('Layout/HeaderView', $content);
 		$this->load->view('ProductSubCategoryView', $content);
