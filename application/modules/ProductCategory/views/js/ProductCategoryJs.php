@@ -12,9 +12,6 @@
 				is_active: {
 					required: true,
 				},
-				img_url: {
-					required: true,
-				},
 			}
 		})
 	});

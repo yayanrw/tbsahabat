@@ -5,7 +5,7 @@ require_once APPPATH . 'core/Helper.php';
 
 class ProductCategory extends CI_Controller
 {
-	private $titleName = 'ProductCategory';
+	private $titleName = 'Product Category';
 	private $tableName = 'm_product_category';
 	private $viewName = '';
 

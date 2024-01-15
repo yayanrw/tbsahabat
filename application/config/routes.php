@@ -107,3 +107,12 @@ $route['admin/social-medias/delete/(:num)'] = 'SocialMedia/Delete/$1';
 $route['admin/about'] = 'About';
 $route['admin/about/get/(:num)'] = 'About/Get/$1';
 $route['admin/about/update'] = 'About/Update';
+
+$route['admin/product-categories'] = 'ProductCategory';
+$route['admin/product-categories/update-active/(:num)/(:num)'] = 'ProductCategory/UpdateActive/$1/$2';
+$route['admin/product-categories/get-all'] = 'ProductCategory/GetAll';
+$route['admin/product-categories/datatable'] = 'ProductCategory/Datatable';
+$route['admin/product-categories/get/(:num)'] = 'ProductCategory/Get/$1';
+$route['admin/product-categories/insert'] = 'ProductCategory/Insert';
+$route['admin/product-categories/update'] = 'ProductCategory/Update';
+$route['admin/product-categories/delete/(:num)'] = 'ProductCategory/Delete/$1';

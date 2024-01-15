@@ -5,7 +5,7 @@ require_once APPPATH . 'core/Helper.php';
 
 class ProductCategoryModel extends CI_Model
 {
-	private $tableName = 'm_category';
+	private $tableName = 'm_product_category';
 
 	public function __construct()
 	{
