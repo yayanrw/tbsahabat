@@ -19,7 +19,7 @@ $currentRole = $this->session->userdata('role_id');
 				</li>
 				<?php if ($currentRole == 1) { ?>
 					<li class="<?php
-								if ($segment == 'master/roles' || $segment == 'master/users') {
+								if ($segment == 'admin/roles' || $segment == 'admin/users') {
 									echo 'open';
 								}
 								?>">
@@ -28,10 +28,10 @@ $currentRole = $this->session->userdata('role_id');
 						</a>
 						<ul class="sub-menu">
 							<li>
-								<a href="<?= base_url('master/roles') ?>" class="<?= $segment == 'master/roles' ? 'active' : ''; ?>">Roles</a>
+								<a href="<?= base_url('admin/roles') ?>" class="<?= $segment == 'admin/roles' ? 'active' : ''; ?>">Roles</a>
 							</li>
 							<li>
-								<a href="<?= base_url('master/users') ?>" class="<?= $segment == 'master/users' ? 'active' : ''; ?>">Users</a>
+								<a href="<?= base_url('admin/users') ?>" class="<?= $segment == 'admin/users' ? 'active' : ''; ?>">Users</a>
 							</li>
 						</ul>
 					</li>
@@ -43,7 +43,7 @@ $currentRole = $this->session->userdata('role_id');
 				PROMO
 			</li>
 			<li>
-				<a href="<?= base_url('banners') ?>" class="<?= $segment == 'banners' ? 'active' : ''; ?>"><i class="material-icons-two-tone">campaign</i> Banners</a>
+				<a href="<?= base_url('admin/banners') ?>" class="<?= $segment == 'admin/banners' ? 'active' : ''; ?>"><i class="material-icons-two-tone">campaign</i> Banners</a>
 			</li>
 		</ul>
 		<ul class="accordion-menu">
@@ -51,13 +51,13 @@ $currentRole = $this->session->userdata('role_id');
 				PRODUCT
 			</li>
 			<li>
-				<a href="<?= base_url('brands') ?>" class="<?= $segment == 'brands' ? 'active' : ''; ?>"><i class="material-icons-two-tone">branding_watermark</i> Brands</a>
+				<a href="<?= base_url('admin/brands') ?>" class="<?= $segment == 'admin/brands' ? 'active' : ''; ?>"><i class="material-icons-two-tone">branding_watermark</i> Brands</a>
 			</li>
 			<li>
-				<a href="<?= base_url('product-categories') ?>" class="<?= $segment == 'product-categories' ? 'active' : ''; ?>"><i class="material-icons-two-tone">category</i> Product Categories</a>
+				<a href="<?= base_url('admin/product-categories') ?>" class="<?= $segment == 'admin/product-categories' ? 'active' : ''; ?>"><i class="material-icons-two-tone">category</i> Product Categories</a>
 			</li>
 			<li>
-				<a href="<?= base_url('products') ?>" class="<?= $segment == 'products' ? 'active' : ''; ?>"><i class="material-icons-two-tone">inventory_2</i> Products</a>
+				<a href="<?= base_url('admin/products') ?>" class="<?= $segment == 'admin/products' ? 'active' : ''; ?>"><i class="material-icons-two-tone">inventory_2</i> Products</a>
 			</li>
 		</ul>
 		<ul class="accordion-menu">
@@ -65,10 +65,10 @@ $currentRole = $this->session->userdata('role_id');
 				SETTING
 			</li>
 			<li>
-				<a href="<?= base_url('about') ?>" class="<?= $segment == 'about' ? 'active' : ''; ?>"><i class="material-icons-two-tone">settings</i> About</a>
+				<a href="<?= base_url('admin/about') ?>" class="<?= $segment == 'admin/about' ? 'active' : ''; ?>"><i class="material-icons-two-tone">settings</i> About</a>
 			</li>
 			<li>
-				<a href="<?= base_url('social-medias') ?>" class="<?= $segment == 'social-medias' ? 'active' : ''; ?>"><i class="material-icons-two-tone">groups</i> Social Media</a>
+				<a href="<?= base_url('admin/social-medias') ?>" class="<?= $segment == 'admin/social-medias' ? 'active' : ''; ?>"><i class="material-icons-two-tone">groups</i> Social Media</a>
 			</li>
 		</ul>
 	</div>
