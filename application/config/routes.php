@@ -103,3 +103,7 @@ $route['admin/social-medias/get/(:num)'] = 'SocialMedia/Get/$1';
 $route['admin/social-medias/insert'] = 'SocialMedia/Insert';
 $route['admin/social-medias/update'] = 'SocialMedia/Update';
 $route['admin/social-medias/delete/(:num)'] = 'SocialMedia/Delete/$1';
+
+$route['admin/about'] = 'About';
+$route['admin/about/get/(:num)'] = 'About/Get/$1';
+$route['admin/about/update'] = 'About/Update';

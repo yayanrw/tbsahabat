@@ -29,7 +29,6 @@ class AboutModel extends CI_Model
 				'phone' => $helper->NullSafety($data['phone']),
 				'whatsapp' => $helper->NullSafety($data['whatsapp']),
 				'description' => $helper->NullSafety($data['description']),
-				'updated_by' => $this->session->userdata('user_id'),
 			);
 		} else {
 			$update = array(
@@ -39,7 +38,6 @@ class AboutModel extends CI_Model
 				'whatsapp' => $helper->NullSafety($data['whatsapp']),
 				'img_url' => $helper->NullSafety($data['img_url']),
 				'description' => $helper->NullSafety($data['description']),
-				'updated_by' => $this->session->userdata('user_id'),
 			);
 		}
 		$this->db->where('id', $data['id']);
