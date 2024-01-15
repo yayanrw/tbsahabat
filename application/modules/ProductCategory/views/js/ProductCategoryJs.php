@@ -89,30 +89,6 @@
 		}
 	})
 
-	const btnView = (id) => {
-		setFormReadonly(true)
-		formReset()
-
-		Swal.showLoading()
-		fetch(`${CURRENT_URL}/get/${id}`, {
-				method: 'GET'
-			})
-			.then(response => response.json())
-			.then(res => {
-				Swal.close()
-				if (res.status) {
-					$('#id').val(res.data.id)
-					$('#category').val(res.data.category)
-					$('#is_active').val(res.data.is_active)
-					$('#btnSubmit').html('Update')
-					scrollToTop()
-				} else {
-					swalError(res.message)
-				}
-			})
-			.catch(error => swalError(error))
-	}
-
 	const btnActive = (id, is_active) => {
 		Swal.showLoading()
 		fetch(`${CURRENT_URL}/update-active/${id}/${is_active}`, {

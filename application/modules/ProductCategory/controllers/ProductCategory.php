@@ -51,8 +51,8 @@ class ProductCategory extends CI_Controller
 			}
 
 			$action = '
-            <div class="text-center">
-                <button type="button" title="View Detail" class="btn btn-primary btn-icon btn-sm " onclick="btnView(\'' . $key->id . '\')"><i class="fa-solid fa-eye"></i></button> ';
+            <div class="text-center">';
+			$action .= '<a href="' . base_url("admin/categories/$key->id/sub-categories") . '" title="View SubCategory" target="_blank" class="btn btn-primary btn-icon btn-sm "><i class="fa-solid fa-link"></i></a> ';
 			$action .= '<a href="' . base_url("uploads/categories/$key->img_url") . '"  target="_blank" title="Preview" class="btn btn-info btn-icon btn-sm "><i class="fa-solid fa-image"></i></a> ';
 			$action .= '<button type="button" title="Edit" class="btn btn-warning btn-icon btn-sm " onclick="btnEdit(\'' . $key->id . '\')"><i class="fa-solid fa-pen-to-square"></i></button> ';
 			if ($key->is_active == '0') {
