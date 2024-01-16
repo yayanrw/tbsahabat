@@ -134,3 +134,12 @@ $route['admin/groups/get/(:num)'] = 'ProductCategory/ProductGroup/Get/$1';
 $route['admin/groups/insert'] = 'ProductCategory/ProductGroup/Insert';
 $route['admin/groups/update'] = 'ProductCategory/ProductGroup/Update';
 $route['admin/groups/delete/(:num)'] = 'ProductCategory/ProductGroup/Delete/$1';
+
+$route['admin/products'] = 'Product';
+$route['admin/products/update-active/(:num)/(:num)'] = 'Product/UpdateActive/$1/$2';
+$route['admin/products/get-all'] = 'Product/GetAll';
+$route['admin/products/datatable'] = 'Product/Datatable';
+$route['admin/products/get/(:num)'] = 'Product/Get/$1';
+$route['admin/products/insert'] = 'Product/Insert';
+$route['admin/products/update'] = 'Product/Update';
+$route['admin/products/delete/(:num)'] = 'Product/Delete/$1';
