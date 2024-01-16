@@ -118,6 +118,7 @@
 								<th>Name</th>
 								<th>Brand</th>
 								<th>Category</th>
+								<th>Status</th>
 								<th>Action</th>
 							</tr>
 						</thead>
@@ -130,6 +131,7 @@
 								<th>Name</th>
 								<th>Brand</th>
 								<th>Category</th>
+								<th>Status</th>
 								<th>Action</th>
 							</tr>
 						</tfoot>

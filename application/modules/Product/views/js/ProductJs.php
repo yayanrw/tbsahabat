@@ -4,6 +4,8 @@
 
 	$(document).ready(function() {
 		loadDataTable()
+		getBrands()
+		getCategories()
 		$('#form').validate({
 			rules: {
 				sku: {
@@ -55,6 +57,14 @@
 	$('#btnCancel').on('click', function() {
 		setFormReadonly(false)
 		formReset()
+	})
+
+	$('#product_category_id').on('change', function() {
+		getSubCategories($(this).val())
+	})
+
+	$('#product_sub_category_id').on('change', function() {
+		getGroups($(this).val())
 	})
 
 	$('#form').on('submit', function(e) {
@@ -193,5 +203,81 @@
 					.catch(error => swalError(error))
 			}
 		})
+	}
+
+	const getBrands = () => {
+		fetch(`${BASE_URL}/admin/brands/get-all`, {
+				method: 'GET'
+			})
+			.then(response => response.json())
+			.then(res => {
+				if (res.status) {
+					$('#brand_id').html('')
+					$('#brand_id').append(`<option value="">- Select Brand -</option>`)
+					res.data.forEach(element => {
+						$('#brand_id').append(`<option value="${element.id}">${element.brand}</option>`)
+					})
+				} else {
+					swalError(res.message)
+				}
+			})
+			.catch(error => swalError(error))
+	}
+
+	const getCategories = () => {
+		fetch(`${BASE_URL}/admin/categories/get-all`, {
+				method: 'GET'
+			})
+			.then(response => response.json())
+			.then(res => {
+				if (res.status) {
+					$('#product_category_id').html('')
+					$('#product_category_id').append(`<option value="">- Select Category -</option>`)
+					res.data.forEach(element => {
+						$('#product_category_id').append(`<option value="${element.id}">${element.category}</option>`)
+					})
+				} else {
+					swalError(res.message)
+				}
+			})
+			.catch(error => swalError(error))
+	}
+
+	const getSubCategories = (product_category_id) => {
+		fetch(`${BASE_URL}/admin/sub-categories/get-all?product_category_id=${product_category_id}`, {
+				method: 'GET'
+			})
+			.then(response => response.json())
+			.then(res => {
+				if (res.status) {
+					$('#product_sub_category_id').html('')
+					$('#product_sub_category_id').append(`<option value="">- Select Sub Category -</option>`)
+					res.data.forEach(element => {
+						$('#product_sub_category_id').append(`<option value="${element.id}">${element.sub_category}</option>`)
+					})
+				} else {
+					swalError(res.message)
+				}
+			})
+			.catch(error => swalError(error))
+	}
+
+	const getGroups = (product_group_id) => {
+		fetch(`${BASE_URL}/admin/groups/get-all?product_group_id=${product_group_id}`, {
+				method: 'GET'
+			})
+			.then(response => response.json())
+			.then(res => {
+				if (res.status) {
+					$('#product_group_id').html('')
+					$('#product_group_id').append(`<option value="">- Select Group -</option>`)
+					res.data.forEach(element => {
+						$('#product_group_id').append(`<option value="${element.id}">${element.group}</option>`)
+					})
+				} else {
+					swalError(res.message)
+				}
+			})
+			.catch(error => swalError(error))
 	}
 </script>

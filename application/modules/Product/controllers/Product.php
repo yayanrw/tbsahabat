@@ -30,7 +30,7 @@ class Product extends CI_Controller
 	public function Datatable()
 	{
 		$helper = Helper::getInstance();
-		$table = $this->tableName;
+		$table = $this->viewName;
 		$column_order = array('sku', 'name', 'brand', 'category', 'is_active');
 		$column_search = array('sku', 'name', 'brand', 'category', 'is_active');
 		$orderby = array('sku' => 'asc');

@@ -14,8 +14,12 @@ class ProductGroupModel extends CI_Model
 
 	public function GetAll()
 	{
-		$data = $this->db->get_where($this->tableName, ['is_active' => 1])->result();
-		return $data;
+		$product_sub_category_id = $this->input->get('product_sub_category_id');
+
+		if (!empty($product_sub_category_id)) {
+			return $this->db->get_where($this->tableName, ['is_active' => 1, 'product_sub_category_id' => $product_sub_category_id])->result();
+		}
+		return $this->db->get_where($this->tableName, ['is_active' => 1])->result();
 	}
 
 	public function Get($id)
